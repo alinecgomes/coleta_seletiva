@@ -1,16 +1,43 @@
-# React + Vite
+# ♻️ Coleta Seletiva
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Sobre o Projeto
 
-Currently, two official plugins are available:
+Aplicação web para consulta de datas e horários da coleta seletiva por CEP em Santa Cruz do Sul, desenvolvida como projeto da disciplina **Atividade Extensionista II: Tecnologia Aplicada à Inclusão Digital**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+O sistema permite que moradores verifiquem os dias e horários de coleta na sua rua, facilitando o descarte correto de resíduos recicláveis e contribuindo com a sustentabilidade do município.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+- **React** - Biblioteca para construção da interface
+- **Vite** - Build tool e servidor de desenvolvimento
+- **Tailwind CSS** - Framework de estilização
+- **React Router DOM** - Gerenciamento de rotas
+- **React Query** - Gerenciamento de estado e cache
+- **Axios** - Cliente HTTP para APIs
+- **GitHub Pages** - Hospedagem da aplicação
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📦 Como Executar
+
+```bash
+# Clone o repositório
+git clone https://github.com/alinecgomes/coleta_seletiva.git
+
+# Entre na pasta
+cd coleta-seletiva
+
+# Instale as dependências
+npm install
+
+# Rode o projeto
+npm run dev
+
+```
+
+## 🌐 Acesse
+**GitHub:** https://github.com/alinecgomes/coleta_seletiva
+
+**Deploy:** https://alinecgomes.github.io/coleta_seletiva
