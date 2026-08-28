@@ -23,4 +23,5 @@ export interface CepSearchResult {
   city: string;
   state: string;
   collectionInfo: CollectionDisplay | null;
+  isInvalidCity?: boolean;
 }

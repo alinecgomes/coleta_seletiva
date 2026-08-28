@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search, MapPin, AlertCircle, Loader2 } from 'lucide-react';
+import { Search, MapPin, AlertCircle, Loader2, Building, Calendar, Clock } from 'lucide-react';
 import { searchByCep } from '@/utils/cepUtils';
 import { CepSearchResult } from '@/types/cep';
 import { CollectionResult } from './CollectionResult';
@@ -33,7 +33,8 @@ export const CepSearch = () => {
         setError('CEP não encontrado. Verifique o número digitado.');
       } else {
         setResult(data);
-        if (!data.collectionInfo) {
+        // Não mostra erro se não encontrar coleta, pois pode ser de outra cidade
+        if (data.collectionInfo === null && data.city === "Santa Cruz do Sul") {
           setError(`Nenhuma informação de coleta encontrada para o bairro: ${data.neighborhood}`);
         }
       }
@@ -69,7 +70,7 @@ export const CepSearch = () => {
             className="h-12 text-lg"
           />
         </div>
-        <Button onClick={handleSearch} disabled={loading} size="lg" className="h-12 px-6">
+        <Button onClick={handleSearch} disabled={loading} size="lg" className="h-12 px-6 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white shadow-md">
           {loading ? (
             <Loader2 className="w-5 h-5 animate-spin" />
           ) : (
@@ -82,7 +83,7 @@ export const CepSearch = () => {
       </div>
 
       {error && (
-        <div className="flex items-center gap-2 p-3 bg-red-50 text-red-700 rounded-lg mb-4">
+        <div className="flex items-center gap-2 p-3 bg-red-50 text-red-700 rounded-lg mb-4 border border-red-200">
           <AlertCircle className="w-5 h-5 flex-shrink-0" />
           <span>{error}</span>
         </div>
@@ -108,13 +109,32 @@ export const CepSearch = () => {
             </div>
           </div>
 
-          {/* Informações de Coleta */}
-          {result.collectionInfo ? (
+          {/* Verifica se é Santa Cruz do Sul */}
+          {result.city !== "Santa Cruz do Sul" ? (
+            <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 text-center">
+              <div className="text-5xl mb-3">🌍</div>
+              <h3 className="text-lg font-semibold text-amber-800 mb-2">
+                CEP de outra cidade
+              </h3>
+              <p className="text-amber-700">
+                O sistema de coleta seletiva está disponível apenas para <strong>Santa Cruz do Sul - RS</strong>.
+              </p>
+              <div className="mt-4 p-3 bg-amber-100/50 rounded-lg">
+                <p className="text-amber-600 text-sm">
+                  <span className="font-medium">📌 Dica:</span> Consulte a prefeitura de {result.city}/{result.state} para informações sobre coleta seletiva na sua região.
+                </p>
+              </div>
+            </div>
+          ) : result.collectionInfo ? (
             <CollectionResult result={result.collectionInfo} />
           ) : (
             <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-100 text-center">
+              <div className="text-4xl mb-2">♻️</div>
               <p className="text-yellow-800">
-                Nenhuma informação de coleta disponível para este bairro.
+                Nenhuma informação de coleta disponível para o bairro: <strong>{result.neighborhood}</strong>
+              </p>
+              <p className="text-yellow-600 text-sm mt-2">
+                Entre em contato com a COOMCAT para mais informações.
               </p>
             </div>
           )}

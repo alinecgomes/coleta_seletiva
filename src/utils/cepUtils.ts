@@ -19,7 +19,7 @@ export const fetchCep = async (cep: string): Promise<ViaCepResponse | null> => {
     const data = await response.json();
     
     if (data.erro) {
-      return null; // CEP não encontrado
+      return null;
     }
     
     return data;
@@ -36,8 +36,13 @@ export const searchByCep = async (cep: string): Promise<CepSearchResult | null> 
     return null;
   }
   
-  // Busca informações de coleta pelo bairro
-  const collectionInfo = searchByNeighborhood(cepData.bairro);
+  // Verifica se é Santa Cruz do Sul
+  const isSantaCruz = cepData.localidade === "Santa Cruz do Sul";
+  
+  // Só busca informações de coleta se for Santa Cruz do Sul
+  const collectionInfo = isSantaCruz 
+    ? searchByNeighborhood(cepData.bairro)
+    : null;
   
   return {
     cep: cepData.cep,
